@@ -46,7 +46,7 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             survey_question.setText(answer.question)
             survey_answer.setText(answer.answer_text)
 
-            val requestOptions = RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background)
+            val requestOptions = RequestOptions().placeholder(R.drawable.threestars).error(R.drawable.threestars)
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOptions)

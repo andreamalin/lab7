@@ -24,7 +24,7 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
     var actual_rating = ""
     var actual_question = ""
     var actual_survey = 0
-    var actual_image = ""
+    var actual_image = 0
 
 
 
@@ -60,6 +60,7 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
     //Insert int answer
     fun insertAnswerInt(answer: Answer){
         actual_rating = answer.answer_number.toString()
+        actual_image = answer.ratingImage
     }
     //Insert String answer
     fun insertAnswerString(answer: Answer){
@@ -83,6 +84,7 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
     fun deleteAnswers(){
         val db = this.writableDatabase
         val cv = ContentValues()
+        data = ArrayList()
 
         cv.put(COL_ID, actual_survey)
         cv.put(COL_QUESTION, actual_question)
