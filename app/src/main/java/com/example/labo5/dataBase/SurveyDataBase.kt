@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-
+import android.util.Log
 
 
 //Code reference: CodeAndroid
@@ -17,12 +17,16 @@ val COL_ID = "id"
 val COL_RATING = "rating"
 var COL_QUESTION = "question"
 
+var data = ArrayList<Answer>()
 
 class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME, null, 4){
     var actual_answer = ""
     var actual_rating = ""
     var actual_question = ""
     var actual_survey = 0
+    var actual_image = ""
+
+
 
     //Creating table
     override fun onCreate(db: SQLiteDatabase?) {
@@ -47,6 +51,8 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
         cv.put(COL_ANSWER, actual_answer)
         cv.put(COL_RATING, actual_rating)
 
+
+
         db.insert(TABLE_NAME,null,cv)
         db.close()
     }
@@ -67,32 +73,6 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
     fun insertSurvey(survey: Int){
         actual_survey = survey
     }
-    //Reading all the table
-    fun readAnswers(): MutableList<String>{
-        val list: MutableList<String> = ArrayList()
-        val db = this.readableDatabase
-        val query = "SELECT * FROM "+ TABLE_NAME //Selecting everything
-        val cursor = db.rawQuery(query, null)
-
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                var text = "ENCUESTA " + cursor.getString(cursor.getColumnIndex(COL_ID)) +
-                        "\nPregunta: " + cursor.getString(cursor.getColumnIndex(COL_QUESTION)) +
-                        "\nRespuesta: " +cursor.getString(cursor.getColumnIndex(COL_ANSWER)) +
-                        "\nRating: " +cursor.getString(cursor.getColumnIndex(COL_RATING))
-
-                list.add(text)
-
-                cursor.moveToNext()
-            }
-        }
-        //Closing result and data base
-        cursor.close()
-        db.close()
-
-        return list //Returning answers
-    }
     //Deleting table
     fun deleteSurvey(){
         val db = this.writableDatabase
@@ -112,4 +92,12 @@ class SurveyDataBase(context: Context?):SQLiteOpenHelper(context, DATABASE_NAME,
         db.insert(TABLE_NAME,null,cv)
     }
 
+    fun addData(){
+        data.add(Answer(actual_survey, actual_answer, actual_question, actual_image))
+        Log.d("tamano data", "se agrega")
+    }
+
+    fun getDataAdded():ArrayList<Answer>{
+        return data
+    }
 }

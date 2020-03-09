@@ -66,6 +66,7 @@ class AnswersFragment : Fragment() {
                 db.insertAnswerInt(answer)
                 db.insertSurvey(viewModelResults.getSurveyQuantity())
                 db.insert() //Inserts new answers
+                db.addData() //Creating actual card
 
                 view!!.findNavController().navigate(R.id.action_answersFragment_to_resultsFragment)
 

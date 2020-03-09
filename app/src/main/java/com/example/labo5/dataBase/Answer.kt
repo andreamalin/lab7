@@ -25,6 +25,9 @@ class Answer{
     @ColumnInfo(name = "questions_answered")
     var question: String = "" //Question answered
 
+    @ColumnInfo(name = "rating_image")
+    var ratingImage: String = "" //Rating image
+
     //For String questions
     constructor(poll_id:Int, question_id: Int, text:String) {
         this.poll_id = poll_id
@@ -36,6 +39,28 @@ class Answer{
         this.poll_id = poll_id
         this.question_id = question_id
         this.answer_number = number
+        //Automatically setting the rating star image depending
+        //on the answer gave
+        if (this.answer_number == 0.0f){
+            ratingImage = "@drawable/zerostar"
+        } else if (this.answer_number == 1.0f){
+            ratingImage = "@drawable/onestar"
+        } else if (this.answer_number == 2.0f){
+            ratingImage = "@drawable/twostars"
+        } else if (this.answer_number == 3.0f){
+            ratingImage = "@drawable/threestars"
+        } else if(this.answer_number == 4.0f) {
+            ratingImage = "@drawable/fourstars"
+        } else {
+            ratingImage = "@drawable/fivestars"
+        }
+    }
+    //For cards
+    constructor(actual_survey:Int, actual_answer:String, actual_question:String, actual_image:String){
+        this.poll_id = actual_survey
+        this.answer_text = actual_answer
+        this.question = actual_question
+        this.ratingImage = actual_image
     }
 }
 

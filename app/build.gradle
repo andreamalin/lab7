@@ -52,6 +52,19 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.0.0"
     kapt "android.arch.persistence.room:compiler:1.0.0"
 
+    // Card View
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    // Recycler View
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:4.8.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.8.0"
+    //butter knife
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
 
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
